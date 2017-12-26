@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-once</title>
+    <style>
+        #list{width: 400px; border: 1px solid #000; border-collapse: collapse;}
+        #list td, #list th{border: 1px solid #000; text-align: center}
+        #list > thead > tr {color: yellow; background-color: purple}
+        .divider{height: 2px; background-color: gray}
+    </style>
+    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+</head>
+<body>
+    <div id="example">
+        <!-- v-once는 단 한번만 컴파일, 개발자 도구에서 데이터 변경해도 안변함 -->
+        <span v-once>{{message}}</span>
+    </div>
+    <script>
+        var vm = new Vue({
+            el : "#example",
+            data : {
+                message : "Hello World"
+            }
+        });
+    </script>
+</body>
+</html>
