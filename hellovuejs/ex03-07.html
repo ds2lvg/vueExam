@@ -13,7 +13,28 @@
 </head>
 <body>
     <div id="example">
-
+        <p>
+            이름 : <input type="text" v-model="name" placeholder="두자 이상 입력하세요">
+        </p>
+        <table id="list">
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>이름</th>
+                    <th>전화번호</th>
+                    <th>주소</th>
+                </tr>
+            </thead>
+            <tbody id="contacts">
+                <tr v-for="contact in contacts">
+                    <td>{{contact.no}}</td>
+                    <td>{{contact.name}}</td>
+                    <td>{{contact.tel}}</td>
+                    <td>{{contact.address}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div v-show="isProcessing === true">조회중</div>
     </div>
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>
@@ -23,13 +44,16 @@
         // 단순 변경되는 데이터 사용할때 계산형속성(computed)이 더 간편
         var vm = new Vue({
             el : "#example",
-            data : { x:0, y:0, },
-            computed :{
-                sum : function() {
-                    var result = Number(this.x) + Number(this.y);
-                    if(isNaN(result)) return 0;
-                    else return result;                    
-                }
+            data : {
+                name : "",
+                isProcessing : false,
+                contactlist : []
+            },
+            watch :{
+
+            },
+            methods :{
+                
             }
         });
     </script>
