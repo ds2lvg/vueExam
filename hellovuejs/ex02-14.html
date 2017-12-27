@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>v-for</title>
+    <title>데이터 양방향 바인딩을 통한 검색</title>
     <style>
         #list{width: 400px; border: 1px solid #000; border-collapse: collapse;}
         #list td, #list th{border: 1px solid #000; text-align: center}
@@ -13,6 +13,7 @@
     <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
 </head>
 <body>
+    <!-- 이거 이용하면 비동기로 게시판 글에서 검색하는 기능 만들수 있는건가??!! -->
     <div id="example">
         <p>국가명 : <input type="text" v-model="countryname" placeholder="국가명"></p>
         <table id="list">
@@ -52,9 +53,11 @@
             data : model,
             computed : {
                 filtered : function() {
+                    // cname은 input에 입력된 문자(나라이름)에서 공백 없앤것
                     var cname = this.countryname.trim();
+                    //filter()는 callback함수를 호출해 조건을 만족(true)하는 요소(item)을 모아서 새로운 배열을 만들어 리턴    
                     return this.countries.filter(function(item,index) {
-                        if (item.name.indexOf(cname) > -1) {
+                        if (item.name.indexOf(cname) > -1) { //배열 요소의이름과 입력된 텍스트가 일치할 경우
                             return true;
                         }
                     });
