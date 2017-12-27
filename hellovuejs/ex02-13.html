@@ -28,6 +28,8 @@
             data : { num : 0 },
             computed : {
                 sum : function() {
+                    // 계산형속성은 실행결과를 캐싱된 값으로 출력함(vmSum.sum 해봐도 현재 시간이 실행안되는걸 확인 가능)
+                    console.log(Date.now());
                     // Number()나 parseInt() 사용해서 숫자 값으로 변경
                     var n = Number(this.num);
                     if(Number.isNaN(n) || n < 1) return 0;
