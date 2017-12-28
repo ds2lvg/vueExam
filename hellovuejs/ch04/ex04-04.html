@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>기본 이벤트 v-on:contextmenu</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        html, body{margin:0; padding:0;}
+        #example{height: 98vh; min-height: 100%; padding: 5px;}
+        [v-cloak] {display: none;} 
+    </style>
+    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+</head>
+<body>
+    <!-- <div id="example" v-on:contextmenu="ctxStop"> -->
+    <!-- 마우스 오른쪽 클릭으로 내장 컨텍스트메뉴 보는것이 막힘 -->
+    <div id="example" v-on:contextmenu.prevent="ctxStop">
+        <a href="http://facebook.com" @click="confirmFB">페이스북</a>
+    </div>
+    <script>
+        /* 기본 이벤트
+        1. a 클릭시 경로로 이동
+        2. 마우스 오른쪽버튼 클릭시 컨텍스트 메뉴가 보임
+        3. form에서 submit 클릭시 action 경로로 method 방식으로 전송
+        4. input text에서 키보드 누르면 입력한 문자가 나타남
+        */
+        var vm = new Vue({
+            el : "#example",
+            methods :{
+                ctxStop : function(e) {
+                    // v-on:contextmenu에 .prevent 추가하면 아래 코드가 자동으로 됨
+                    // e.preventDefault();
+                },
+                confirmFB : function(e) {
+                    if (!confirm("페이스북으로 이동할까요?")) {
+                        e.preventDefault(); // 아니오 선택시 이동(기본이벤트)방지
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
