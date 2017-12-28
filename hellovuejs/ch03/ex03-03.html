@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>계산형 속성의 getter/setter 메서드</title>
+    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+</head>
+<body>
+    <div id="example">
+        금액 : <span>{{amount}}원</span>
+    </div>
+    <script>
+    var vm = new Vue({
+        el : "#example",
+        data : { amt : 1234567 },
+        computed : {
+            amount : {
+                // amt값을 3자리마다 ,를 넣어서 리턴
+                get : function() {
+                    //숫자를 문자로 변환하기위해 String 객체 생성 
+                    var s = new String(""+this.amt);
+                    var result = "";
+                    var num = 0;
+                    for (let i = s.length-1; i >= 0; i--) {
+                        result = s[i] + result;
+                        if(num % 3 == 2 && i !== 0) // 3자리(2,5,8) 마다 ",숫자" 삽입
+                            result = "," + result;
+                        num++;
+                    }
+                    return result;
+                },
+                // 문자열을 입력받으면 ,를 제거한뒤 숫자로 변환하여 속성으로 할당
+                set : function(amt) {
+                    if (typeof(amt) === "string") {
+                        var result = parseInt(amt.replace(/,/g, "")) // 정규포현식으로 ,제거해서 숫자로 변환함
+                        if (isNaN(result)) this.amt = 0; // 숫자 X => 0 할당
+                        else this.amt = result;  // 숫자 O => 숫자변환값 할당
+                    } else if (typeof(amt) === "number"){
+                        this.amt = amt;
+                    }
+                }
+            }
+        }
+    });
+    </script>
+</body>
+</html>
