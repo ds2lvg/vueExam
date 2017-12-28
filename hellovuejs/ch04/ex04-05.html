@@ -23,7 +23,8 @@
 </head>
 <body>
     <div id="example">
-        <div id="outer" @click="outerClick">
+        <!-- @click.stop : e.stopPropagation()까지 포함한 코드 -->
+        <div id="outer" @click.stop="outerClick">
             <div id="inner" @click="innerClick"></div>
         </div>
     </div>
@@ -39,7 +40,7 @@
                     console.log("Event Phase : ", e.eventPhase);
                     console.log("Current Target : ", e.currentTarget);
                     console.log("Target : ", e.target);
-                    e.stopPropagation(); // 이벤트 버블링을 막음
+                    // e.stopPropagation(); @click.stop 작성시 필요 없음
                 },
                 innerClick : function(e) {
                     console.log("### InnerClick");
