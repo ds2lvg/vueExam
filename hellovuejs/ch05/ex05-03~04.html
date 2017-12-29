@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>인라인 스타일 :style과 여러개 스타일 바인딩</title>
+    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+</head>
+<body>
+    <div id="example">
+        <!-- :style 로 개별 속성마다 바인딩 가능하지만 유지보수가 힘들어서 비추 -->
+        <div :style="{ backgroundColor:a.bc, border:a.bd, width:a.w+'px', height:a.h+'px' }"></div>
+        <!-- v-bind:style="[a, b, ..]"여러개 스타일 객체를 바인딩 가능 -->
+        <button id="btn1" v-bind:style="[myColor, myLayout]" >버튼1</button>
+    </div>
+    <script>
+        var vm = new Vue({
+            el : "#example",
+            data : {
+                // 개별 속성 바인딩
+                a : {bc:'yellow', bd:'1px solid gray', w:200, h:100 },
+                // 스타일 객체들 바인딩
+                myColor : {backgroundColor:'purple', color:'yellow'},
+                myLayout : {width:'150px', height:'80px', textAlign:'center'}
+            }
+        });
+    </script>
+</body>
+</html>
