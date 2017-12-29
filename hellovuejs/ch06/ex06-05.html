@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>컴포넌트 작성3 : script type="text/x-template"</title>
+    <!-- vue.min.js으로 하면 크롬 브라우저의 devtools의 Vue탭이 활성화가 안됨 -->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<script type="text/x-template" id="helloTemplate">
+    <div>hello world</div>
+</script>
+<script>
+    // 서버 실행 : live-server   
+    Vue.component('hello-component', {
+        template : '#helloTemplate'
+    })
+</script>
+<body>
+    <div id="app">
+        <hello-component></hello-component> 
+        <hello-component></hello-component> 
+        <hello-component></hello-component> 
+    </div>
+</body>
+<script>
+    // 크롬 브라우저의 devtools 사용
+    Vue.config.devtools = true;
+    var v = new Vue({
+        el : '#app'
+    })
+    // devtools 사용하려면 서버 필요하므로 설치
+    // 서버 설치 : npm install -g live-server
+</script>
+</html>
