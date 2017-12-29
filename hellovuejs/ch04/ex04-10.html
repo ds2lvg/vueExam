@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>키코드 수식어 : 키이벤트.키코드</title>
+    <style>
+        /*
+        키보드 키를 누를때 고유의 키코드 값을 가질때만 이벤트 발생
+        */
+        #list{width: 400px; border: 1px solid #000; border-collapse: collapse;}
+        #list td, #list th{border: 1px solid #000; text-align: center}
+        #list > thead > tr {color: yellow; background-color: purple}
+        [v-cloak] {display: none;} 
+    </style>
+</head>
+<body>
+    <div id="example">
+        <p>
+            <!-- v-on:keyup.13 : keyup뒤에 .키코드 를 입력하면 해당 키코드 입력시 발생-->
+            이름 : <input type="text" v-model="name" v-on:keyup.13="search" placeholder="두자 이상 입력하세요">
+        </p>
+        <table id="list">
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>이름</th>
+                    <th>전화번호</th>
+                    <th>주소</th>
+                </tr>
+            </thead>
+            <tbody id="contacts">
+                <tr v-for="contact in contactlist">
+                    <td>{{contact.no}}</td>
+                    <td>{{contact.name}}</td>
+                    <td>{{contact.tel}}</td>
+                    <td>{{contact.address}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div v-show="isProcessing === true">조회중</div>
+    </div>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.js"></script>
+    <!-- es6-promise는 IE에서 Promise 객체를 이용하기 위한 폴리필 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.1.1/es6-promise.auto.min.js"></script>
+    <script>
+        var vm = new Vue({
+            el : "#example",
+            data : {
+                name : "",
+                isProcessing : false,
+                contactlist : []
+            },
+            methods :{
+                // 2글자이상 입력후 엔터키(keyCode 13)를 감지하면 검색 메서드(fetchContacts) 실행
+                search : function(e) {
+
+                    /*** v-on:keyup.13 아래 if문을 대체함 ***/
+                    // if (e.keyCode === 13) {
+                        var val = e.target.value;
+                        if (val.length >= 2) {
+                            this.fetchContacts();
+                        } else {
+                            this.contactlist = [];
+                        }
+                    // }
+                },
+                fetchContacts : function(){
+                    this.contactlist = [];
+                    this.isProcessing = true;
+                    var url = "http://sample.bmaster.kro.kr/contacts_long/search/" + this.name;
+                    var vm = this;
+                    // fetch()의 리턴값은 promise 객체 (서버 응답이 오면 .then()에 전달한 함수가 호출됨)
+                    // 따라서 fetch()를 호출하는 시점과 then()에 인자로 전달한 함수가 실행되는 시점이 차이가 난다.
+                    fetch(url)
+                        .then(function(response){
+                            return response.json();
+                        }).then(function(json){
+                            vm.contactlist = json;
+                            vm.isProcessing = false;
+                        }).catch(function(ex){
+                            console.log('parsing falied', ex);
+                            vm.contactlist = [];
+                            vm.isProcessing = false;
+                        });
+                }
+            }
+        });
+    </script>
+</body>
+</html>
