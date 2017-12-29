@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>이벤트 전파와 버블링(상위 전파)</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        #outer {
+            width:200px; height:200px; border: 2px solid black;
+            background-color: aqua;
+            position: absolute; top: 100px; left: 50px;
+            padding: 10px;
+        }
+        #inner {
+            width: 100PX; height: 100PX; border: 2px solid black;
+            background-color: yellow;
+        }
+        [v-cloak] {display: none;} 
+    </style>
+    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+</head>
+<body>
+    <div id="example">
+        <!-- @click.stop : e.stopPropagation()까지 포함한 코드 -->
+        <div id="outer" @click.stop="outerClick">
+            <div id="inner" @click="innerClick"></div>
+        </div>
+    </div>
+    <script>
+        // 개발자 도구 켜고 확인해보면 inner를 클릭해도 outer도 실행되는 것을 볼 수 있다.
+        var vm = new Vue({
+            el : "#example",
+            methods :{
+                // Current Target : 현재 이벤트가 일어난 요소
+                // Target : 이벤트가 일어난 원본 요소(=버블링시 원래 이벤트가 일어난 요소를 지칭)
+                outerClick : function(e) {
+                    console.log("### OuterClick");
+                    console.log("Event Phase : ", e.eventPhase);
+                    console.log("Current Target : ", e.currentTarget);
+                    console.log("Target : ", e.target);
+                    // e.stopPropagation(); @click.stop 작성시 필요 없음
+                },
+                innerClick : function(e) {
+                    console.log("### InnerClick");
+                    console.log("Event Phase : ", e.eventPhase);
+                    console.log("Current Target : ", e.currentTarget);
+                    console.log("Target : ", e.target);
+                    e.stopPropagation(); // 이벤트 버블링을 막음
+                }
+            }
+        });
+    </script>
+</body>
+</html>
