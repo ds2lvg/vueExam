@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>인라인 스타일</title>
+    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+</head>
+<body>
+    <div id="example">
+        <!-- @mouseover == v-on:mouseover -->
+        <button id="a" v-bind:style="style1" @mouseover.stop="overEvent" @mouseout.stop="outEvent">테스트</button>
+    </div>
+    <script>
+        var vm = new Vue({
+            el : "#example",
+            data : {
+                // 자바스크립트에서 CSS표기법은 케밥(-)이 아닌 카멜 표기법인것을 유의 text-align => textAlign
+                style1 : {backgroundColor:'aqua', border:'1px solid gray', witdh:'100px', textAlign:'center'}
+            },
+            methods :{
+                overEvent : function(e) {
+                    console.log("over")
+                    this.style1.backgroundColor = "purple";
+                    this.style1.color = "yellow";
+                },
+                outEvent : function(e) {
+                    this.style1.backgroundColor = "aqua";
+                    this.style1.color = "black";
+                }
+            }
+        });
+    </script>
+</body>
+</html>
