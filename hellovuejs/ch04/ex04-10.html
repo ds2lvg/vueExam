@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>키코드 수식어 : 키이벤트.키코드</title>
+    <title>키코드 수식어 : 키이벤트.키코드와 키코드 별칭</title>
     <style>
-        /*
-        키보드 키를 누를때 고유의 키코드 값을 가질때만 이벤트 발생
+        /* Vue.js에서 제공하는 키코드 별칭
+        * .enter .tab .delete .esc .space
+        * .up .down .left .right
+        * .ctrl .art .shift .meta
         */
         #list{width: 400px; border: 1px solid #000; border-collapse: collapse;}
         #list td, #list th{border: 1px solid #000; text-align: center}
@@ -18,8 +20,8 @@
 <body>
     <div id="example">
         <p>
-            <!-- v-on:keyup.13 : keyup뒤에 .키코드 를 입력하면 해당 키코드 입력시 발생-->
-            이름 : <input type="text" v-model="name" v-on:keyup.13="search" placeholder="두자 이상 입력하세요">
+            <!-- v-on:keyup.enter : keyup뒤에 .키코드 를 입력하면 해당 키코드 입력시 발생-->
+            이름 : <input type="text" v-model="name" v-on:keyup.enter="search" placeholder="두자 이상 입력하세요">
         </p>
         <table id="list">
             <thead>
@@ -57,7 +59,7 @@
                 // 2글자이상 입력후 엔터키(keyCode 13)를 감지하면 검색 메서드(fetchContacts) 실행
                 search : function(e) {
 
-                    /*** v-on:keyup.13 아래 if문을 대체함 ***/
+                    /*** v-on:keyup.enter가 아래 if문을 대체함 ***/
                     // if (e.keyCode === 13) {
                         var val = e.target.value;
                         if (val.length >= 2) {
