@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>컴포넌트에서의 스타일 적용</title>
+    <style>
+    .boxcolor{background-color: orange;}
+    .center{width: 200px; height: 100px; line-height: 100px; text-align: center; border: 1px solid gray;}
+    </style>
+    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+</head>
+<body>
+    <div id="example">
+        <center-box v-bind:class="boxstyle"></center-box>
+    </div>
+    <script>
+        Vue.component('center-box', {
+            template : '<div class="center">중앙에 위치</div>'
+        })
+        var vm = new Vue({
+            el : "#example",
+            data : { 
+                boxstyle : { boxcolor : true }
+             }
+        });
+        // vm.boxstyle.boxcolor=false => 배경색 없앰
+    </script>
+</body>
+</html>
