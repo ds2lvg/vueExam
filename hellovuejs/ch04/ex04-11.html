@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>마우스 버튼 수식어</title>
+    <style>
+        /* Vue.js에서 제공하는 키코드 별칭
+        * .left .right .middle
+        */
+        html, body{margin: 0; padding: 0;}
+        #example{height: 98vh; min-height: 100%; padding: 10px;}
+        [v-cloak] {display: none;} 
+    </style>
+</head>
+<body>
+    <!-- v-on:contextmenu.prevent : 마우스 오른쪽 클릭시 컨텍스트 메뉴 나타나는 것을 방지 -->
+    <div id="example" v-on:contextmenu.prevent="ctxStop" @mouseup.left="leftMouse" @mouseup.right="rightMouse">
+        <div>
+            Left Click : 왼쪽으로<br>
+            Right Click : 오른쪽으로
+        </div>
+        <!-- v-bind:style : 스크립트로 변경할 css속성들 처리할 때 유용 -->
+        <img src="images/foot.jpg" v-bind:style="{position:'absolute', left:pos.left+'px', top:pos.top+'px'}" alt="">
+    </div>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.js"></script>
+    <!-- es6-promise는 IE에서 Promise 객체를 이용하기 위한 폴리필 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.1.1/es6-promise.auto.min.js"></script>
+    <script>
+        var vm = new Vue({
+            el : "#example",
+            data : {
+                pos : { left:100, top:100 }
+            },
+            methods :{
+                ctxStop : function(e) { },
+                leftMouse : function(e) {
+                    this.pos.left -= 30;
+                    console.log("Move Left!!");
+                },
+                rightMouse : function(e) {
+                    this.pos.left += 30;
+                    console.log("Move Right!!");
+                }
+            }
+        });
+    </script>
+</body>
+</html>
