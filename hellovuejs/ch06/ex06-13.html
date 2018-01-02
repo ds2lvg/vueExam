@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>prop를 이용한 정보전달2 - 표기법 관련 유의사항</title>
+    <!-- vue.min.js으로 하면 크롬 브라우저의 devtools의 Vue탭이 활성화가 안됨 -->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<template id='listTemplate'>
+    <li>{{myMessage}}</li>
+</template>
+<script>
+var data = {nowTS : 0 };
+Vue.component('list-component', {
+    template : '#listTemplate',
+    props : ['myMessage']
+})
+</script>
+<body>
+    <div id="app">
+        <ul>
+            <!-- myMessage(카멜표기법)는 my-message(케밥표기법)으로 작성해야 렌더링됨
+            <list-component myMessage="hello"></list-component>
+            <list-component myMessage="신짜오"></list-component>
+            <list-component myMessage="니하오마"></list-component> -->
+            <list-component my-message="hello"></list-component>
+            <list-component my-message="신짜오"></list-component>
+            <list-component my-message="니하오마"></list-component>
+        </ul>
+    </div>
+</body>
+<script type="text/javascript">
+Vue.config.devtools = true;
+var v = new Vue({
+    el : '#app'
+})
+</script>
+</html>
