@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>prop와 event 예제</title>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.1.1/es6-promise.auto.min.js"></script>
+</head>
+<!-- contactlist-component 시작 -->
+<style>
+    #list{width: 400px; border: 1px solid #000; border-collapse: collapse;}
+    #list td, #list th{border: 1px solid #000; text-align: center}
+    #list > thead > tr {color: yellow; background-color: purple}
+    [v-cloak] {display: none;}
+</style>
+<template id="listTemplate">
+    <div>
+        <table id="list">
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>이름</th>
+                    <th>전화번호</th>
+                    <th>주소</th>
+                </tr>
+            </thead>
+            <tbody id="contacts">
+                <tr v-for="contact in contactlist">
+                    <td>{{contact.no}}</td>
+                    <td>{{contact.name}}</td>
+                    <td>{{contact.tel}}</td>
+                    <td>{{contact.address}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</template>
+<script>
+// contactlist-component는 자체 상태/속성를 가지고 있지 않고 외부에서 속성(props)을 제공받아야 한다
+Vue.component('contactlist-component', {
+    template : '#listTemplate',
+    props : ['contacts']
+})
+</script>
+<!-- contactlist-component 끝 -->
+<!-- search-component 시작 -->
+<template id="searchTemplate">
+    <p>
+        이름 : <input type="text" v-model.trim="name" :placeholder="placeholder" @keyup.enter="keyupEvent" >
+    </p>
+</template>
+<script>
+Vue.component('search-component', {
+    template : '#searchTemplate',
+    // input type="text"에 v-model로 2way-binding하기위해 name 데이터 옵션 사용
+    data : function() {
+        return { name : '' };
+    },
+    methods : {
+        // 입력된 글자가 2글자 이상일때 키워드를 담아 이벤트를 발신$emit()
+        keyupEvent : function(e) {
+            var val = e.target.value;
+            if (val.length >= 2) { // search이벤트 발생시킬때 val전달
+                this.$emit('search', val);
+            } else {
+                this.$emit('search', '');
+            }
+        }
+    }
+});
+</script>
+<!-- search-component 끝 -->
+<!-- search-contact-component 시작 -->
+<template id="searchcontactTemplate">
+    <div>
+        <search-component placeholder="2글자이상 입력후 엔터!" v-on:search="searchEvent"></search-component>
+        <contactlist-component v-bind:contacts="contactlist"></contactlist-component>
+        <div v-show="isProcessing === true">조회중</div>
+    </div>
+</template>
+<script>
+Vue.component('search-contact-component', {
+    template : '#searchcontactTemplate',
+    data : function() {
+        return {
+            contactlist : [],
+            isProcessing : false
+        }
+    },
+    methods : {
+                searchEvent : function(name) {
+                    if (name == '') {
+                        this.contactlist = [];
+                    } else {
+                        this.fetchContacts(name);
+                    }     
+                },
+                fetchContacts : _.debounce(function(){
+                    this.contactlist = [];
+                    this.isProcessing = true;
+                    var url = "http://sample.bmaster.kro.kr/contacts_long/search/" + name;
+                    var vm = this;
+                    // fetch()의 리턴값은 promise 객체 (서버 응답이 오면 .then()에 전달한 함수가 호출됨)
+                    // 따라서 fetch()를 호출하는 시점과 then()에 인자로 전달한 함수가 실행되는 시점이 차이가 난다.
+                    fetch(url)
+                        .then(function(response){
+                            return response.json();
+                        }).then(function(json){
+                            vm.contactlist = json;
+                            vm.isProcessing = false;
+                        }).catch(function(ex){
+                            console.log('parsing falied', ex);
+                            vm.contactlist = [];
+                            vm.isProcessing = false;
+                        });
+                }, 300)
+            }    
+});
+</script>
+<!-- search-contact-component 끝 -->
+<body>
+
+</body>
+</html>
