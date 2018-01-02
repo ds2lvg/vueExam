@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>event를 이용한 정보 전달</title>
+    <!-- 자식 컴포넌트에서는 이벤트를 발신(emit)하고 부모 컴포넌트에서는 이벤트를 수신(v-on)한다 -->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<!-- child Component 시작 -->
+<style>
+    .buttonstyle {width: 120px; height: 30px; text-align: center;}
+</style>
+<template id="childTemplate">
+    <div>
+        <!-- 버튼 만들때 마다 buttonInfo.text 찍어주고 data-lang 특성에 buttonInfo.value값 바인딩  -->
+        <button class="buttonstyle" v-on:click="clickEvent" v-bind:data-lang="buttonInfo.value">{{ buttonInfo.text }}</button>
+    </div>
+</template>
+<script>
+Vue.component('child-component', {
+    template : '#childTemplate',
+    // buttonInfo 속성은 부모컴포넌트로부터 전달받으며 버튼태그에서 전달받은 값을 이용해 버튼 리스트 생성
+    props : [ 'buttonInfo' ],
+    methods : {
+        // 버튼이 클릭되면 timeclick 이벤트를 발신$emit()함
+        clickEvent : function(e) {// buttonInfo.text, buttonInfo.value 두개를 timeclickEvent의 인자로 전달
+            this.$emit('timeclick', e.target.innerText, e.target.dataset.lang);
+        }
+    }
+})    
+</script>
+<!-- child Component 끝 -->
+<!-- parent Component 시작 -->
+<template id="parent-template">
+    <div>
+        <child-component v-for="s in buttons" v-bind:button-info="s" v-on:timeclick="timeclickEvent"></child-component>
+        <hr>
+        <div>{{ msg }}</div>
+    </div>
+</template>
+<script>
+Vue.component('parent-component', {
+    template : '#parent-template',
+    // buttons속성은 Vue인스턴스 vm의 data{buttons}를 전달받아 v-for로 반복 생성되는 자식 컴포넌트에 각각의 배열을 값 바인딩
+    props : [ 'buttons' ],
+    // data옵션은 해당 컴퍼넌트 내에서만 사용하기 위해 정의
+    data : function() {
+        return { msg:"" };
+    },
+    methods : { // 전달받은 buttonInfo.text, buttonInfo.value
+        timeclickEvent : function(k, v) {
+            this.msg = k + ", " + v;
+        }
+    }
+});    
+</script>
+<!-- parent Component 끝 -->
+<body>
+    <div id="app">
+        <parent-component :buttons="buttons"></parent-component>
+    </div>
+</body>
+<script>
+Vue.config.devtools = true;
+var vm = new Vue({
+    el : "#app",
+    data : {
+        buttons : [
+            { text : "Hello", value : "영어" },
+            { text : "씬짜오", value : "베트남어" },
+            { text : "니하오", value : "중국" }
+        ]
+    }
+});
+</script>
+</html>
