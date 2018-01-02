@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>컴포넌트에서의 data 옵션2</title>
+    <!-- vue.min.js으로 하면 크롬 브라우저의 devtools의 Vue탭이 활성화가 안됨 -->
+    <!-- <script src="https://unpkg.com/vue/dist/vue.js"></script> -->
+    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+</head>
+<template id='timeTemplate'>
+    <div>
+        <span>{{nowTS}}</span>
+        <button v-on:click="timeClick">현재 시간</button>
+    </div>
+</template>
+<script>
+// 전역변수 data에 객체를 할당해두고 컴퍼넌트 내부 data에 전역변수 할당
+// => 동일한 컴포넌트를 여러번 사용하더라도 데이터 옵션은 동일한 객체를 참조한다
+var data = {nowTS : 0 };
+Vue.component('time-component', {
+    template : '#timeTemplate',
+    data : function() {
+        return data;
+    },
+    methods : {
+        timeClick : function(e) {
+            this.nowTS = (new Date()).getTime();
+        }
+    }
+})
+</script>
+<body>
+    <div id="app">
+        <time-component></time-component>
+        <time-component></time-component>
+    </div>
+</body>
+<script type="text/javascript">
+Vue.config.devtools = true;
+var v = new Vue({
+    el : '#app'
+})
+</script>
+</html>
