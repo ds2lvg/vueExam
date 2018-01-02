@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DOM 템플릿 구문 작성시 주의사항2</title>
+    <!-- vue.min.js으로 하면 크롬 브라우저의 devtools의 Vue탭이 활성화가 안됨 -->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<script>
+// 서버 실행 : live-server   
+Vue.component('option-component', {
+    template : '<option>hello</option>'
+})
+</script>
+<!-- <option-component>가 "text/x-template"안에서 사용되었기 때문에 가능 -->
+<script type="text/x-template" id="selectTemplate">
+    <select>
+        <option-component></option-component>
+        <option-component></option-component>
+    </select> 
+</script>
+<script>
+Vue.component('select-component', {
+    template : '#selectTemplate'
+})
+</script>
+<body>
+    <div id="app">
+        <select-component></select-component>
+    </div>
+</body>
+<script>
+// 크롬 브라우저의 devtools 사용
+Vue.config.devtools = true;
+var v = new Vue({
+    el : '#app'
+})
+// devtools 사용하려면 서버 필요하므로 설치
+// 서버 설치 : npm install -g live-server
+</script>
+</html>
