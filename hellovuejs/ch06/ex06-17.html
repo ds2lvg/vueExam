@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>prop를 이용한 배열 데이터 전달 출력</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<!-- listTemplate 컴퍼넌트 시작 -->
+<style>
+    #list{width: 400px; border: 1px solid #000; border-collapse: collapse;}
+    #list td, #list th{border: 1px solid #000; text-align: center}
+    #list > thead > tr {color: yellow; background-color: purple}
+</style>
+<template id="listTemplate">
+    <div>
+        <table id="list">
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>이름</th>
+                    <th>전화번호</th>
+                    <th>주소</th>
+                </tr>
+            </thead>
+            <tbody id="contacts">
+                <tr v-for="contact in contacts">
+                    <td>{{contact.no}}</td>
+                    <td>{{contact.name}}</td>
+                    <td>{{contact.tel}}</td>
+                    <td>{{contact.address}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</template>
+<script>
+Vue.component('contactlist-component', {
+    template : '#listTemplate',
+    props : [ 'contacts' ]
+})    
+</script>
+<!-- listTemplate 컴퍼넌트 끝 -->
+<body>
+    <div id="app">
+        <h1>예방접종</h1>
+        <hr />
+        <h3>1차 대상자 : 5월 1~3일</h3>
+        <!-- contacts로 v-bind한 데이터 전달 -->
+        <contactlist-component :contacts="list1"></contactlist-component>
+        <h3>2차 대상자 : 5월 13~15일</h3>
+        <contactlist-component :contacts="list2"></contactlist-component>
+    </div>
+</body>
+<script>
+Vue.config.devtools = true;
+var vm = new Vue({
+    el : "#app",
+    data : {
+        list1 :[
+            {"no" : 97, "name" : "하니", "tel":"010-3456-8901", "address":"경기"},
+            {"no" : 96, "name" : "성소", "tel":"010-3456-8901", "address":"제주"},
+            {"no" : 96, "name" : "지아", "tel":"010-3456-8901", "address":"서울"}
+        ],
+        list2 :[
+            {"no" : 82, "name" : "안지현", "tel":"010-3456-8901", "address":"서울"},
+            {"no" : 81, "name" : "설현", "tel":"010-3456-8901", "address":"서울"}
+        ]
+    }
+});
+</script>
+</html>
