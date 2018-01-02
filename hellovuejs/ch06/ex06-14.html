@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>prop를 이용한 정보전달2</title>
+    <!-- vue.min.js으로 하면 크롬 브라우저의 devtools의 Vue탭이 활성화가 안됨 -->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<template id='listTemplate'>
+    <li>{{message}}</li>
+</template>
+<script>
+var data = {nowTS : 0 };
+Vue.component('list-component', {
+    template : '#listTemplate',
+    props : {
+        message : { type:String, default:'안녕하세요'},
+        count : { type:Number, required:true }
+        // required는 필수 입력 사항이지만 아예 전달하지 않으면 렌더링에는 문제가 없음
+    }
+})
+</script>
+<body>
+    <div id="app">
+        <ul>
+            <!-- v-bind:count 또는 :count로 사용하지 않으면 count값이 문자열 값으로 전달됨
+                <list-component message="hello" count="100"></list-component> -->
+            <list-component message="hello" v-bind:count="100"></list-component>
+            <list-component message="신짜오" :count="21"></list-component>
+            <list-component message="니하오마"></list-component>
+            <list-component :count="1000"></list-component>
+        </ul>
+    </div>
+</body>
+<script type="text/javascript">
+Vue.config.devtools = true;
+var v = new Vue({
+    el : '#app'
+})
+</script>
+</html>
