@@ -19,17 +19,16 @@
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
 <!-- 공용 스타일 끝 -->
 </head>
-<!-- 이벤트 버스 객체 시작 -->
+<!-- 이벤트 버스 객체 시작 : 이벤트를 통해서 컴포넌트간의 정보교환만을 위한 이벤트 객체 -->
 <script>
-// 이벤트를 통해서 컴포넌트간의 정보교환만을 위한 이벤트 객체
 // 할 일을 추가하면 이벤트 버스 객체를 이용해 데이터를 추가하고 그 데이터는 list-componenet를 통해 나타남
 var eventBus = new Vue();
 </script>
 <!-- 이벤트 버스 객체 끝 -->
-<!-- list-component 시작 : 값을 입력하고 추가 버튼을 클릭하는 부분-->
+<!-- list-component 시작 : 할일목록(todolist)을 data 옵션으로 관리함-->
 <style>
 ul {  margin: 0; padding: 0; }
-ul li { 
+ul li {
     cursor: pointer; position: relative; padding: 8px 8px 8px 40px;
     background: #eee; font-size: 14px;  transition: 0.2s; user-select: none;  
 }
@@ -61,6 +60,7 @@ ul li.checked::before {
     </ul>
 </template>
 <script>
+    //
 Vue.component('list-conponent', {
     template : '#list-template',
     created : function() {
@@ -97,7 +97,7 @@ Vue.component('list-conponent', {
 })    
 </script>
 <!-- list-component 끝 -->
-<!-- input-component 시작 -->
+<!-- input-component 시작 : 값을 입력하고 추가 버튼을 클릭하는 부분 -->
 <style>
 .input {
     border: none; width: 75%; height:35px; padding: 10px;
