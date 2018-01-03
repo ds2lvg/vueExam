@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>이벤트 버스 객체를 이용한 통신</title>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.1.1/es6-promise.auto.min.js"></script>
+</head>
+<script>
+// 이벤트 버스 객체 정의
+var eventBus = new Vue(); 
+</script>
+<!-- 첫번째 자식 컴퍼넌트 시작 -->
+<template id="child1Template">
+    <div>
+        <!-- 클릭하면 clickEvent 메서드 호출 -->
+        <button v-on:click="clickEvent">child1 button!!</button>
+        <div>{{currentTime}}</div>
+    </div>
+</template>
+<script>
+Vue.component('child1-component', {
+    template : '#child1Template',
+    data : function() {
+        return { currentTime : '' };
+    },
+    methods : {
+        clickEvent : function() {
+            var d = new Date();
+            var t = d.toLocaleTimeString() + " " + d.getMilliseconds() + "ms";
+            // eventBus에 click1 이벤트에 시간정보 담아 발신
+            eventBus.$emit('click1', t);
+            this.currentTime = t;
+        }
+    }
+});  
+</script>
+<!-- 첫번째 자식 컴퍼넌트 끝 -->
+<!-- 두번째 자식 컴퍼넌트 시작 -->
+<template id="child2Template">
+    <ul>
+        <li v-for="t in timelist">{{t}}</li>
+    </ul>
+</template>
+<script>
+Vue.component('child2-component', {
+    template : '#child2Template',
+    data : function() {
+        return {
+            timelist : []
+        };
+    },// Vue 인스턴스가 만들어질때 $on()를 이벤트 수신 정보를 등록
+    created : function() {
+        // eventBus를 통해 click1 수신되면 child1Click메서드 호출
+        eventBus.$on('click1', this.child1Click)
+    },
+    methods : {
+        // 인자로 전달받은 시간 정보를 로컬 상태인 timelist(data 옵션)에 추가
+        child1Click : function(time) {
+            this.timelist.push(time);
+        }
+    }
+});    
+</script>
+<!-- 두번째 자식 컴퍼넌트 끝 -->
+<body>
+<div id="app">
+        <child1-component></child1-component>
+        <hr>
+        <child2-component></child2-component>  
+    </div>
+</body>
+<script>
+Vue.config.devtools = true;
+var vm = new Vue({
+    el : "#app"
+})
+</script>
+
+
+</html>
