@@ -64,6 +64,7 @@ ul li.checked::before {
 Vue.component('list-conponent', {
     template : '#list-template',
     created : function() {
+        // add-todo 이벤트를 받음
         eventBus.$on('add-todo', this.addTodo);
     },
     data : function() { 
@@ -112,6 +113,7 @@ Vue.component('list-conponent', {
 </style>
 <template id="input-component">
     <div>
+        <!-- enter키 누르면 addTodo메서드 호출 -->
         <input type="text" class="input" id="task" v-model.trim="todo" v-on:keyup.enter="addTodo" placeholder="입력 후 엔터!">
         <span class="addbutton" v-on:click="addTodo">추 가</span>
     </div>
@@ -124,6 +126,7 @@ Vue.component('input-component', {
     },
     methods : {
         addTodo : function() {
+            // todo data를 담아 add-tododo이벤트를 보냄
             eventBus.$emit('add-todo', this.todo);
             this.todo = "";
         }
