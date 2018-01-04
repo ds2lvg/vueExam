@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>String의 메서드</title>
+</head>
+<body>
+
+<script>
+var a = new String("Boy");
+var b = " meet";
+var c = "123456789";
+var d = "2018-01-04";
+
+// 자바처럼 +연산자가 오버로딩되서 문자열 이어붙임
+document.write(a+b+" Girls<br>");
+
+// 문자열.concat(문자열1,문자열2...) : 문자열 이어붙임
+document.write(a.concat(b, " Girls")+"<br>");
+
+// 문자열.charAt(시작index) : 문자열 잘라냄
+document.write(a.charAt(0)+"<br>");
+
+// 문자열.indexOf(문자열): 문자열 index 찾기, 못찾으면 -1
+document.write(a.indexOf("o")+"<br>");
+
+// 문자열.trim(): 공백 제거
+document.write(b.trim()+"<br>"); // meet
+
+// 문자열.substr(시작index,length) : 문자열 골라냄
+document.write(c.substr(5,3)+"<br>"); // 678
+
+// 문자열.substring(시작index,종료index) : 문자열 골라냄
+document.write(c.substring(5,3)+"<br>"); // 45
+
+// 문자열.split(문자열) : 문자열을 기준으로 잘라 배열에 넣어 반환
+document.write(d.split("-")+"<br>"); // 2018,01,04
+
+</script>
+</body>
+</html>

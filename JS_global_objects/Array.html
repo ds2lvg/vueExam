@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Array의 메서드</title>
+</head>
+<body>
+
+<script>
+// Date get메서드
+var array5 = new Array(1, "2", true, function(){alert("love5")});
+// 배열[인덱스]() : 배열 속의 함수 실행
+array5[3]();
+
+var arr = [1,2,3,4,5]
+
+// 배열.reverse() :배열 순서를 역전함
+arr.reverse(); // 5,4,3,2,1
+
+// 배열.join(요소 사이에 넣을 문자열) : 배열 내의 요소를 모두 합쳐 하나의 문자열로 만들어 리턴
+arr.join(" = "); // "5 = 4 = 3 = 2 = 1"
+
+// 배열.slice(시작index,끝index) : 
+var arr_slice = arr.slice(1,4); // 4,3,2
+console.log("arr.slice(1,4) : " + arr_slice);
+
+// 배열.concat(요소1,요소2...)
+var arr_concat = arr.concat(4, 'five', 6); // 5,4,3,2,1,4,five,6
+console.log("arr.concat(4, 'five', 6) : " + arr_concat);
+
+// 배열.sort() : 오름차순 정렬
+var arr_sort = arr.sort();
+console.log("arr.sort() : " + arr_sort);
+
+
+</script>
+</body>
+</html>
