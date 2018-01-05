@@ -1,0 +1,8 @@
+★바벨 사용할 경로로 변경 (제대로 안되면 경로 맞나부터 확인)
+cd es2015test
+
+babel 폴더명 -d build : src폴더의 모든 파일을 빌드함
+babel src -d build
+
+node 폴더명/파일명 : cli 환경에서 자바스크립트 파일 확인
+node build/07-03.js
