@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta title="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>callback function</title>
+</head>
+<body>
+
+<script>
+/* 원래 콜백함수 개념
+var callback = function(i) {
+    alert("함수호출 : " + i);
+}
+
+function callTenTimes(callback) {
+    for (var i = 0; i < 3; i++) {
+        callback(i);
+    }
+}
+
+callTenTimes(callback);
+*/
+
+function callTenTimes(callback) {
+    for (var i = 0; i < 3; i++) {
+        callback(i);
+    }
+}
+
+callTenTimes(function(i){
+    alert("함수호출 : " + i);
+})
+</script>
+</body>
+</html>

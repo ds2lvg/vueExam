@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta title="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Immediately-invoked Function</title>
+</head>
+<body>
+
+<script>
+// 즉시 호출 함수(Immediately-invoked Function)
+(function returnFunction(){
+    return function() {
+        alert("Hello Immediately-invoked Function .. !");
+    }
+})()();
+
+
+</script>
+</body>
+</html>
