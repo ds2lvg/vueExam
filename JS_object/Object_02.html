@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta title="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Object 출력 : 다른 버젼</title>
+    <style>
+    .tb{margin: auto; width: 500px;}    
+    .tb caption{font-size: 20px; color:green}    
+    .tb th{background-color: rgb(253, 78, 215);}    
+    .tb tr:hover td{background-color: rgb(155, 138, 250)}    
+    </style>
+</head>
+<body>
+    <div id="table_wrap"></div>
+
+<script>
+var str = ["세", "cm"];
+var book = {
+    title : "채식주의자",
+    publisher : "창비",
+    autor : "한강",
+    pirce : "25000원",
+    info : {
+        pages : 442,
+        date : "2010년 1월 30일",
+        ISBN10 : 8970506470,
+        size : "188mm*254mm"
+    },
+    print : function(){
+        for (var k1 in book) {
+            if(book[k1] != book.print){
+                if( typeof(book[k1]) != "object"){
+                    tag += "<tr><td>"+k1+"</td>"
+                    tag += "<td>"+book[k1]+"</td></tr>"
+                } else{
+                    for (var k2 in book[k1]){
+                        tag += "<tr><td>"+k1+"."+k2+"</td>"
+                        tag += "<td>"+book[k1][k2]+"</td></tr>"
+                    }
+                }
+            }
+        }
+    }
+};
+
+var tw = document.getElementById("table_wrap");
+var tag ="<table class='tb' border='1'>"
+tag += "<colgroup> <col width='50%'><col width='50%'></colgroup>"
+tag += "<caption>책정보</caption>"
+tag += "<tr><th>제목</th>"
+tag += "<th>내용</th></tr>"
+book.print();
+tag += "</table>"
+
+tw.innerHTML=tag;
+</script>
+</body>
+</html>
