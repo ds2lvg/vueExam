@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta title="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dom 제어</title>
+    <script>
+        window.onload = function() {
+            var f = document.getElementById("flower");
+            
+            var imgs = ["img1.jpg","img2.jpg","img3.jpg","img4.jpg"];
+            var cnt = 0;
+            var reverse = false;
+            f.onclick = function(){
+                // 카운트에 % 배열.length하면 배열 갯수만큼만 반복할수 있음  
+                f.setAttribute("src", imgs[cnt%imgs.length]);
+                ++cnt;
+                
+                // 증가하다가 최대치갔을때 감소
+                // f.setAttribute("src", imgs[cnt]);
+                // if(reverse){
+                //     --cnt;
+                //     if(cnt == 0){
+                //         reverse = false;
+                //     }
+                // }else{
+                //     ++cnt;
+                //     if(cnt == imgs.length-1){
+                //         reverse = true;
+                //     }
+                // }
+
+
+            }
+        }
+    </script>
+</head>
+<body>
+    <img src="img4.jpg" id="flower" width="300" alt="">
+</body>
+</html>
