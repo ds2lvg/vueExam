@@ -1,5 +1,6 @@
 "use strict";
 
+// ...파라미터명 : 가변 파라미터로 갯수 상관없이 다 받을수 있음
 function foodReport(name, age) {
     console.log(name + " , " + age);
 
