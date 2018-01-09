@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta title="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>location</title>
+</head>
+<body>
+    <h1>selectedIndex : select태그의 인덱스값을 가져옴</h1>
+    <select name="" id="site" onchange="load()">
+        <option value="http://www.naver.com">네이버</option>
+        <option value="http://www.daum.net" selected>다음</option>
+        <option value="http://www.nate.com">네이트</option>
+    </select>
+<script>
+    var select = document.getElementById("site");
+    function load(){
+        console.log(select.options[0]); // <option value="http://www.naver.com">네이버</option>
+        console.log(select.selectedIndex); // 선택된것 숫자로 반환
+        // 2초 뒤에 페이지 이동
+        setTimeout(function(){
+            location.href = select.options[select.selectedIndex].value;
+        },2000);
+    }
+</script>
+</body>
+</html>
