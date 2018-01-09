@@ -33,7 +33,7 @@ module.exports = {
     ],
     // contentBase: 웹서버 루트로 지정할 경로
     // port: 기본값 8080
-    // historyApilfallback: 없는 페이지 이동할때 기본페이지로 자동이동 시킬것인지 여부
+    // historyApifallback: 없는 페이지 이동할때 기본페이지로 자동이동 시킬것인지 여부
     devServer: {
         contentBase: './public/',
         port: 3000,
