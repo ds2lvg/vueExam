@@ -42,9 +42,11 @@ function check(){
 function idcheck(){
     if (form.id.value=="") {
         alert("아이디를 입력하세요");
-        var url = "";
+        id.focus();
+    } else{
+        var url = "idcheck.html";
         window.open(url,"_blank", "width=300, height=250")
-    }    
+    }
 }
 
 // 3. move() : 주민번호 앞자리는 6자리 숫자이면 뒷자리로 포커스를 옮기고
