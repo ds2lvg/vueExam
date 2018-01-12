@@ -12,6 +12,6 @@ export default {
     }
 }
 </script>
-<style>
+<style scoped>
 .main{ border: 1px solid #000; background-color: yellow }
 </style>
