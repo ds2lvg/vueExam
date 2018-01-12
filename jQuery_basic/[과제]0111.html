@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>과제</title>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+jQuery.noConflict();
+var jm = jQuery;
+jm(function(){
+    // 1번 문제
+    jm('ul').css({'width':'800px', 'overflow':'hidden'});
+    jm('ul li').css({'float':'left','list-style':'none', 'width':'14.28%', 'padding':'10px', 'text-align':'center', 'box-sizing':'border-box', 'color':'#fff'});
+    jm('ul li:nth-child(odd)').css({'background':'darkred'});
+    jm('ul li:nth-child(even)').css({'background':'darkgreen'});
+
+    // 2번 문제
+    var timer = 5000;
+    setTimeout(function(){
+        var cheked = jm('input:checked');
+        var text = "";
+        cheked.each(function(index, item){
+            // 마지막에 ' , ' 없애는 방법 1
+            // 첫번째만 빼고 전 문자열 사이에 ,를 넣음
+            // if(index == 0){
+            //     text += item.value;
+            // } else{
+            //     text = text + ", " +item.value;
+            // }
+
+           // 마지막에 ' , ' 없애는 방법 2 : 문자열 뒤에마다 ' , ' 넣음
+            text = text + item.value + " , ";
+        })
+        // 뒤에서부터 문자열 3개(' , ')를 잘라냄
+        text = text.substring(0, text.length-3);
+
+        alert("선택한 스킬은 "+text+" 입니다.");
+    }, timer);
+})
+</script>
+</head>
+<body>
+<!-- 1번 문제 -->
+    <ul>
+        <li>First</li>
+        <li>Second</li>
+        <li>Third</li>
+        <li>Fourth</li>
+        <li>Fifth</li>
+        <li>Sixth</li>
+        <li>Seventh</li>
+    </ul>
+    <p>꿈툴이입니다.</p>
+            
+<!-- 2번 문제 -->
+    스킬:
+  <input type="checkbox" name="html" value="HTML" id="html"/>
+  <label for="html">HTML</label>
+
+  <input type="checkbox" name="css" value="CSS" id="css" />
+  <label for="css">CSS</label>
+
+  <input type="checkbox" name="javascript" value="JavaScript" id="javascript"/>
+  <label for="javascript">JavaScript</label>
+
+  <input type="checkbox" name="jsp" value="JSP" id="jsp" />
+  <label for="jsp">JSP</label>
+</body> 
+</html>

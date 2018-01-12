@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>attr({})</title>
+<style>
+*{margin: 0; padding: 0;}
+</style>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+$(function(){
+    $('img').attr({
+        height: function(index){
+            return (index+1) * 100 + 200;
+        },
+        alt: "3대 여신 사진"
+    });
+});
+</script>
+</head>
+<body>
+    <img src="./img/img1.jpg" alt="">
+    <img src="./img/img2.jpg" alt="">
+    <img src="./img/img3.jpg" alt="">
+</body>
+</html>
