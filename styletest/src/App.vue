@@ -1,0 +1,26 @@
+<template>
+  <div id="app">
+      <h2>{{msg}}</h2>
+      <child1></child1>
+      <child2></child2>
+  </div>
+</template>
+
+<script>
+import Child1 from './components/Child1.vue'
+import Child2 from './components/Child2.vue'
+
+export default {
+    name: 'app',
+    components: { Child1, Child2 },
+    data() {
+        return {
+            msg: 'Welcome to your Vue.js App'
+        }
+    }
+}
+</script>
+
+<style>
+
+</style>
