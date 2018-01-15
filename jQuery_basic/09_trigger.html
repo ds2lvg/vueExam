@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>on()과 one()</title>
+<style>
+*{margin: 0; padding: 0;}
+.enter{background-color: red}
+.leave{background-color: green}
+</style>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+$(function(){
+    $('h1:last').on('click', function(){
+        $('h1:last').html(function(index, result){
+            return result + '+';
+        })
+    });
+
+    setInterval(function(){
+        $('h1:last').trigger('click');
+    },1000);
+});
+</script>
+</head>
+<body>
+ <h1>aaaa</h1>
+</body>
+</html>
