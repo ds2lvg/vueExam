@@ -9,21 +9,37 @@
 <script>
 $(function(){
     // css 셋팅
-    $('img').css({"width":"200px"});
+    var img = $('img');
+    img.css({"width":"200px", "float":"left" });
     
-    //
-    setInterval(function(){
+    // 이미지 슬라이드 구현
 
-    });
+    // 한줄로 구현
+    setInterval(function(){
+        $('img').first().appendTo('body');
+    }, 1000)
+
+/* 여러줄 구현
+    var cnt=0;
+    setInterval(function(){       
+        var temp = img.eq(cnt);
+        temp.remove();
+        temp.appendTo('body');
+        cnt++;
+        if(cnt == img.length){
+            cnt = 0;
+        }         
+    },1000);
 });
+*/
 </script>
 </head>
 <body>
-    <img src="./img/Chrysanthemum.jpg" alt="">
-    <img src="./img/Desert.jpg" alt="">
-    <img src="./img/Hydrangeas.jpg" alt="">
-    <img src="./img/Jellyfish.jpg" alt="">
-    <img src="./img/Koala.jpg" alt="">
-    <img src="./img/Penguins.jpg" alt="">
+    <img src="./img/Chrysanthemum.jpg" alt="1">
+    <img src="./img/Desert.jpg" alt="2">
+    <img src="./img/Hydrangeas.jpg" alt="3">
+    <img src="./img/Jellyfish.jpg" alt="4">
+    <img src="./img/Koala.jpg" alt="5">
+    <img src="./img/Penguins.jpg" alt="6">
 </body> 
 </html>
