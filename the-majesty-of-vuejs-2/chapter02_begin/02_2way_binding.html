@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>vue와 jquery의 양방향 바인딩 비교</title>
+</head>
+<body>
+    <div id="app">
+        <!-- vue -->
+        <h1>{{message}}</h1>
+        <input type="text" v-model="message">
+        <!-- jquery -->
+        <h2 id="msgBinding">jquery를 이용한 양방향 바인딩</h1>
+        <input type="text" id="message">        
+    </div>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script>
+        // vue
+        new Vue({
+            el: '#app',
+            data: {
+                message : 'vue를 이용한 양방향 바인딩'
+            }
+        })
+        // jquery
+        $('#message').on('keyup', function(){
+            var message = $('#message').val();
+            $('#msgBinding').text(message);
+        });
+    </script>
+</body>
+</html>
