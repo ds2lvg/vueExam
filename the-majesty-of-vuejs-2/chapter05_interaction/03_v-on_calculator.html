@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <title>이벤트로 계산기 만들기</title>
+    <style>
+        .container{text-align: center;}
+        .container .btn{margin-top: 100px; width: 50%; font-size: 20px;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Type 2 numbers and choose operation</h1>
+        <form class="form-inline" action="">
+            <input type="text" v-model.number="a" class="form-control">
+            <select v-model="operator" name="" id="">
+                <option value="+">+</option>
+                <option value="-">-</option>
+                <option value="*">*</option>
+                <option value="/">/</option>
+            </select>
+            <input type="text" v-model.number="b" class="form-control">
+            <button type="submit" v-on:click="calculate" class="btn btn-primary">Calculate</button>
+            <!-- <button type="submit" @click.prevent="calculate" class="btn btn-primary">Calculate</button> -->
+            <!-- 기본 이벤트 동작 방지 : .prevent, .stop, .capture, .self -->
+        </form>
+        <h2>Result: {{a}} {{operator}} {{b}} = {{c}}</h2>
+    </div>
+    
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+    new Vue({
+        el: '.container',
+        data: {
+            a:1,
+            b:2,
+            c:null,
+            operator: "+"
+        },
+        methods: {
+            calculate: function(e){
+                // 자바스크립트 전통 이벤트 방지 처리
+                e.preventDefault();
+                switch (this.operator) {
+                    case "+": this.c = this.a + this.b; 
+                    break;
+                    case "-": this.c = this.a - this.b; 
+                    break;
+                    case "*": this.c = this.a * this.b; 
+                    break;
+                    case "/": this.c = this.a / this.b; 
+                    break;
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>
