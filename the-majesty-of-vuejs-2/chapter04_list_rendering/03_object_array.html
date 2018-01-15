@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <title>v-for : object array</title>
+</head>
+<body>
+    <div class="container">
+        <h1>let's hear some stories!</h1>
+        <ul class="list-group">
+            <!-- index는 인덱스를 가지고 있는 특별한 변수 -->
+            <li v-for="(story, index) in stories" class="list-group-item">
+                {{ index+1 }} {{ story.writer }} said "{{ story.plot }}"
+            </li>
+        </ul>
+        <pre>
+            {{ $data }}
+        </pre>
+    </div>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+    new Vue({
+        el: '.container',
+        data : {
+            stories : [
+                {
+                    plot : "I crashed my car today!",
+                    writer: "김종민"
+                },
+                {
+                    plot : "yesterday, someone stole my bag!",
+                    writer: "서현숙"
+                },
+                {
+                    plot : "someone ate my chocolate...",
+                    writer: "안지현"
+                },
+                {
+                    plot : "I ate someone's chocolate!s",
+                    writer: "이나경"
+                },
+            ]
+        }
+    })
+</script>
+</body>
+</html>

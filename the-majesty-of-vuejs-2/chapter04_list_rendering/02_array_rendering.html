@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <title>v-for : array rendering</title>
+</head>
+<body>
+    <div class="container">
+        <h1>let's hear some stories!</h1>
+        <ul class="list-group">
+            <li v-for="story in stories" class="list-group-item">
+                someon said "{{ story }}"
+            </li>
+        </ul>
+        <pre>
+            {{ $data }}
+        </pre>
+    </div>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+    new Vue({
+        el: '.container',
+        data : {
+            stories : [
+                "I crashed my car today!",
+                "yesterday, someone stole my bag!",
+                "someone ate my chocolate...",
+            ]
+        }
+    })
+</script>
+</body>
+</html>

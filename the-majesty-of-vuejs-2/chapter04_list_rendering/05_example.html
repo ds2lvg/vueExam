@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <title></title>
+</head>
+<body>
+<div class="container">
+    <h1>this is me!</h1>
+    <ul class="list-group">
+        <!-- index는 인덱스를 가지고 있는 특별한 변수 -->
+        <li v-for="(index, key, value) in personInfo" class="list-group-item">{{ index }}. {{ key }} : {{ value }}</li>
+    </ul>
+</div>    
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+    new Vue({
+        el: '.container',
+        data: {
+            personInfo :{
+                name : "안지현",
+                weight : "48kg",
+                height : "169cm",
+                eyecolor : "deep-brown",
+                favoriteFood : "chicken"
+            }
+        }
+    })
+</script>
+</body>
+</html>
