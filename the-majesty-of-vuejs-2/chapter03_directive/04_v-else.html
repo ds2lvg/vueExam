@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <title>v-else</title>
+</head>
+<body>
+    <div id="app">
+        <h1 v-if="!message">You must send a message for help</h1>
+        <!-- v-if 조건이 일치하지 않으면 보여줌 -->
+        <h2 v-else>you have sent a message</h2>
+        <textarea v-model="message"></textarea>
+        <button v-show="message">
+            Send word to allies for help!
+        </button>
+        <pre>
+            {{ $data }}
+        </pre>
+    </div>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+    new Vue({
+        el:'#app',
+        data: {
+            message: 'Our king is dead'
+        }
+    })
+</script>
+</body>
+</html>

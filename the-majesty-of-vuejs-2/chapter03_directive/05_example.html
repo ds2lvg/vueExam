@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <title></title>
+</head>
+<body>
+    <div id="app">
+        <h1 >
+            Hello 
+            <span v-if="gender == 'male'">mister {{name}}</span>
+            <span v-if="gender == 'female'">miss {{name}}</span>            
+        </h1>
+
+        <div>
+            <label for="">enter your gender</label>
+            <input type="text" v-model="gender">
+        </div>
+        <div>
+            <label for="">enter your name</label>
+            <input type="text" v-model="name">
+        </div>
+    </div>   
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+   new Vue({
+       el:'#app',
+       data:{
+           name:'안지현',
+           gender:'female'
+       }
+   }) 
+</script>
+</body>
+</html>
