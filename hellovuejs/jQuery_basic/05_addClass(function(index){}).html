@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>addClass(function(index){})</title>
+<style>
+.item1{background-color: aqua}
+.item2{background-color: darkcyan}
+.item3{background-color: dodgerblue}
+</style>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+$(function(){
+    // each 사용해서 반복
+    // $('h1').each(function(index){
+    //     $(this).addClass("item"+(index+1));
+    // });
+
+    // addClass를 콜백함수로 반복
+    $('h1').addClass(function(index){
+        return "item"+(index+1);
+    });
+});
+</script>
+</head>
+<body>
+    <h1>header0</h1>
+    <h1>header1</h1>
+    <h1>header2</h1>
+</body>
+</html>
