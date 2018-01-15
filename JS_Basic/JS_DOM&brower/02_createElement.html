@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta title="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dom 제어</title>
+    <script>
+        window.onload = function() {
+            var img1 = document.createElement('img');
+            var img2 = document.createElement('img');
+            // 직접 대입
+            img1.src = "img1.jpg";
+            img1.height = "300"
+            // 메서드로 셋팅
+            img2.setAttribute("src", "img2.jpg");
+            img2.setAttribute("height", "300");
+            document.body.appendChild(img1);
+            document.body.appendChild(img2);
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

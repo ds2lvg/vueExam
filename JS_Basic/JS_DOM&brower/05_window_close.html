@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta title="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>3초 뒤에 열린창 닫기</title>
+<script>
+/*
+open(URL, name, option)
+option 종류, value = {yes, no, 1, 0 }
+width, height : 팝업 크기
+menubar : 메뉴 유무 = value
+status : 상태 표시줄 유무 = value
+resizable : 화면크기 조절유무 = value
+location : 주소입력창의 유무  = value
+left,top : 스크린상의 윈도우 좌표
+*/
+var child = window.open("04_removeChild.html", "_blank", "width=200, height=200, menubar=1, location=1")
+// 3초 뒤에 열린창 닫기
+window.setTimeout(function(){
+    child.close();
+},3000);
+</script>
+</head>
+<body>
+
+</body>
+</html>
